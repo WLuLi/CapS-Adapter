@@ -110,7 +110,7 @@ def main(args):
         print('Processing current dataset: '+ args.dataset)
 
         # features_path = FEATURE_PATH.format(args.dataset) + "/" +  str(args.images_per_class)
-        features_path = FEATURE_PATH.format(args.dataset) + '/' + args.images_per_class.__str__()
+        features_path = FEATURE_PATH.format(args.dataset)
 
         if not os.path.exists(features_path):
             os.makedirs(features_path)
