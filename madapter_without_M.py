@@ -225,7 +225,7 @@ if __name__ == '__main__':
 
         print('--------------------------------------------')
         print('Best for Dataset: {}, Model: {}, SuS Type: {}, alpha: {}, beta: {}, delta: {}, TIP-X-C Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, best_alpha_tipx, best_beta_tipx, best_delta_tipx, tipx_acc))
-        logging.info('Best for Dataset: {}, Model: {}, SuS Type: {}, Prompting strategy: {}, alpha: {}, beta: {}, delta: {}, TIP-X-C Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, best_alpha_tipx, best_beta_tipx, best_delta_tipx, tipx_acc))
+        logging.info('Best for Dataset: {}, Model: {}, SuS Type: {}, alpha: {}, beta: {}, delta: {}, TIP-X-C Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, best_alpha_tipx, best_beta_tipx, best_delta_tipx, tipx_acc))
         print('--------------------------------------------')
     print()
     print('----------------------------------------------------------------------------')
