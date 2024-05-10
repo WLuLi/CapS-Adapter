@@ -116,7 +116,7 @@ def hparam_search(val_features, val_labels, test_features, test_labels, train_im
 
     tipx_top1, tipx_top5 = 0., 0.
 
-    tipx_logits = clip_logits + cache_logits * best_alpha_tipx
+    tipx_logits = total_clip_logits + total_cache_logits * best_alpha_tipx
     tipx_acc1, tipx_acc5 = accuracy(tipx_logits, test_labels, topk=(1, 5))
     tipx_top1 += tipx_acc1
     tipx_top5 += tipx_acc5
