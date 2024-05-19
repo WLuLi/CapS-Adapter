@@ -17,7 +17,7 @@ FEATURE_PATH = './features/few_features/{}'
 CAPTION_FEATURE_DIR = '/{}_caption_features_m{}_k{}.pt'
 IMAGE_FEATURE_DIR = '/{}_image_features_m{}_k{}.pt'
 TARGET_DIR = '/{}_target_m{}_k{}.pt'
-CAPTION_DATA_PATH = "./captioner/captions/captioned_sample/{}"
+CAPTION_DATA_PATH = "./data/caps/captioned_sample/{}"
 
 # feature dimensions for each model
 feat_dims = {'RN50': 1024, 'ViT-B/16': 512, 'RN50x16': 768, 'RN101': 512, 'ViT-L/14': 768, 'ViT-B/32': 512}
