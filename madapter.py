@@ -215,7 +215,7 @@ if __name__ == '__main__':
     else:
         req_models = [args.backbone]
     features_path = FEATURE_PATH + args.dataset
-    few_features_path = FEATURE_PATH + 'fea_features/' + args.dataset
+    few_features_path = FEATURE_PATH + 'few_features/' + args.dataset
 
     for model_ in req_models:
 
@@ -248,7 +248,7 @@ if __name__ == '__main__':
         test_targets_path = features_path+"/{}_t_test_m{}.pt".format(dataset, disp_name)
 
         if args.sus_type == 'caps':
-            support_features_path = os.path.join(features_path,  'caps_{}_f_m{}.pt'.format(dataset, disp_name))
+            support_features_path = os.path.join(features_path, 'caps_{}_f_m{}.pt'.format(dataset, disp_name))
             support_labels_path = os.path.join(features_path, 'caps_{}_t_m{}.pt'.format(dataset, disp_name))
 
             support_caption_features_path = os.path.join(features_path, 'caps_{}_c_m{}.pt'.format(dataset, disp_name))

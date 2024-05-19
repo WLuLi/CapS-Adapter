@@ -249,7 +249,7 @@ if __name__ == '__main__':
 
             support_caption_features_path = os.path.join(features_path, 'caps__{}_c_m{}.pt'.format(dataset, disp_name))
         elif args.sus_type == 'fewshot':
-            few_features_path = "./features/few_features/" + args.dataset
+            few_features_path = "./data/features/few_features/" + args.dataset
             support_features_path = os.path.join(few_features_path, '{}_image_features_m{}_k{}.pt'.format(dataset, disp_name, args.k))
 
             support_labels_path = os.path.join(few_features_path, '{}_target_m{}_k{}.pt'.format(dataset, disp_name, args.k))
