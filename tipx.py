@@ -240,14 +240,14 @@ if __name__ == '__main__':
         test_targets_path = features_path+"/{}_t_test_m{}.pt".format(dataset, disp_name)
 
         if args.sus_type == 'lc' or args.sus_type == 'sd':
-            support_features_path = os.path.join(features_path, str(args.k), 'sus_{}_{}_{}_f_m{}.pt'.format(args.sus_type, args.prompt_shorthand, dataset, disp_name))
+            support_features_path = os.path.join(features_path, 'sus_{}_{}_{}_f_m{}.pt'.format(args.sus_type, args.prompt_shorthand, dataset, disp_name))
             
-            support_labels_path = os.path.join(features_path, str(args.k), 'sus_{}_{}_{}_t_m{}.pt'.format(args.sus_type, args.prompt_shorthand, dataset, disp_name))
-        elif args.sus_type == 'caption':
-            support_features_path = os.path.join(features_path, str(args.k),  'sus_captionsd_{}_f_m{}.pt'.format(dataset, disp_name))
-            support_labels_path = os.path.join(features_path, str(args.k), 'sus_captionsd_{}_t_m{}.pt'.format(dataset, disp_name))
+            support_labels_path = os.path.join(features_path, 'sus_{}_{}_{}_t_m{}.pt'.format(args.sus_type, args.prompt_shorthand, dataset, disp_name))
+        elif args.sus_type == 'caps':
+            support_features_path = os.path.join(features_path, 'caps_{}_f_m{}.pt'.format(dataset, disp_name))
+            support_labels_path = os.path.join(features_path, 'caps_{}_t_m{}.pt'.format(dataset, disp_name))
 
-            support_caption_features_path = os.path.join(features_path,  str(args.k), 'sus_captionsd_{}_c_m{}.pt'.format(dataset, disp_name))
+            support_caption_features_path = os.path.join(features_path, 'caps__{}_c_m{}.pt'.format(dataset, disp_name))
         elif args.sus_type == 'fewshot':
             few_features_path = "./features/few_features/" + args.dataset
             support_features_path = os.path.join(few_features_path, '{}_image_features_m{}_k{}.pt'.format(dataset, disp_name, args.k))
