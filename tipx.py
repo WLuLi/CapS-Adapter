@@ -207,7 +207,7 @@ if __name__ == '__main__':
         req_models = ['RN50', 'RN101', 'ViT-B/32', 'ViT-B/16', 'ViT-L/14']
     else:
         req_models = [args.backbone]
-    features_path = "./features/" + args.dataset
+    features_path = "./data/features/" + args.dataset
 
     for model_ in req_models:
 
