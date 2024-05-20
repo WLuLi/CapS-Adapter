@@ -290,8 +290,8 @@ if __name__ == '__main__':
         tipx_acc, best_alpha_tipx, best_beta_tipx, best_gamma_tipx, best_delta_tipx = hparam_search(val_features, val_labels, test_features, test_labels, support_features, support_caption_features, support_labels, text_classifier_weights, val_kl_divs_sims, test_kl_divs_sims)
 
         print('--------------------------------------------')
-        print('Best for Dataset: {}, Model: {}, SuS Type: {}, k: {}, alpha: {}, beta: {}, gamma: {}, delta: {}, TIP-X-C Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, args.k, best_alpha_tipx, best_beta_tipx, best_gamma_tipx, best_delta_tipx, tipx_acc))
-        logging.info('Best for Dataset: {}, Model: {}, SuS Type: {}, k: {}, alpha: {}, beta: {}, gamma: {}, delta: {}, TIP-X-C Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, args.k, best_alpha_tipx, best_beta_tipx, best_gamma_tipx, best_delta_tipx, tipx_acc))
+        print('Best for Dataset: {}, Model: {}, SuS Type: {}, k: {}, alpha: {}, beta: {}, gamma: {}, delta: {}, CapS-Adapter Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, args.k, best_alpha_tipx, best_beta_tipx, best_gamma_tipx, best_delta_tipx, tipx_acc))
+        logging.info('Best for Dataset: {}, Model: {}, SuS Type: {}, k: {}, alpha: {}, beta: {}, gamma: {}, delta: {}, CapS-Adapter Accuracy: {}'.format(args.dataset, args.backbone, args.sus_type, args.k, best_alpha_tipx, best_beta_tipx, best_gamma_tipx, best_delta_tipx, tipx_acc))
         print('--------------------------------------------')
     print()
     print('----------------------------------------------------------------------------')
