@@ -79,7 +79,7 @@ args.val_batch_size = 64
 args.train_batch_size = 256
 
 json_root = './gpt3_prompts/CuPL_prompts_{}.json'
-features_path = "./features/" + args.dataset
+features_path = "./data/features/" + args.dataset
 
 if(args.backbone=='all'):
     req_models = ['RN50', 'RN101', 'ViT-B/32', 'ViT-B/16', 'ViT-L/14']

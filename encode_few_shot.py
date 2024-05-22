@@ -13,7 +13,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 import argparse
 
 CLIP_MODEL_PATH = './models'
-FEATURE_PATH = './features/few_features/{}'
+FEATURE_PATH = './data/features/few_features/{}'
 CAPTION_FEATURE_DIR = '/{}_caption_features_m{}_k{}.pt'
 IMAGE_FEATURE_DIR = '/{}_image_features_m{}_k{}.pt'
 TARGET_DIR = '/{}_target_m{}_k{}.pt'

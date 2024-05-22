@@ -16,7 +16,7 @@ parser.add_argument('--backbone', type=str, default='RN50')
 parser.add_argument('--dataset', type=str, default='cifar10')
 args = parser.parse_args()
 
-features_path = "./features/" + args.dataset
+features_path = "./data/caps/features/" + args.dataset
 
 clip_model, preprocess = clip.load(args.backbone, download_root='./models')
 clip_model.cuda()

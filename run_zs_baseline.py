@@ -19,7 +19,7 @@ args = parser.parse_args()
 
 logging.basicConfig(filename=args.dataset+ '_zs_baseline' + '.log', filemode='a', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 
-features_path = "./features/" + args.dataset
+features_path = "./data/features/" + args.dataset
 
 if(args.backbone=='all'):
     req_models = ['RN50', 'RN101', 'ViT-B/32', 'ViT-B/16', 'ViT-L/14']
