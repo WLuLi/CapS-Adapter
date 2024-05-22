@@ -118,8 +118,8 @@ for model_ in req_models:
     # dim n
     test_labels = torch.load(test_targets_path)
 
-    cupl_save_weights_path = './features/{}/{}_zeroshot_text_weights_m{}_ptcupl.pt'
-    combined_save_weights_path = './features/{}/{}_zeroshot_text_weights_m{}_ptcombined.pt'
+    cupl_save_weights_path = './data/features/{}/{}_zeroshot_text_weights_m{}_ptcupl.pt'
+    combined_save_weights_path = './data/features/{}/{}_zeroshot_text_weights_m{}_ptcombined.pt'
 
     if(os.path.exists(cupl_save_weights_path.format(dataset, dataset, disp_name))):
         load_cupl_text = True

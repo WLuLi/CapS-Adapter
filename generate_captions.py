@@ -12,8 +12,8 @@ try:
 except RuntimeError:
     pass
 
-GPUS = '0,1,2,3,4,5,6,7'
-DATASET_PATH = './data/caps/sample/{}'
+GPUS = '2,3,4,5'
+DATASET_PATH = './data/caps/samples/{}'
 OUTPUT_BASE = './data/caps/captioned_sample/{}'
 CAPTION_MODEL_PATH = './models/share_captioner'
 
@@ -93,9 +93,9 @@ def worker(gpu, args, class_indices):
     classes = os.listdir(dataset_path)
 
     if gpu == 0:
-        progress_bar = tqdm(range(class_indices), desc="Generating captions")
+        progress_bar = tqdm(class_indices, desc="Generating captions")
     else:
-        progress_bar = range(class_indices)
+        progress_bar = class_indices
 
     for index in progress_bar:
         if index < len(classes):
@@ -123,6 +123,7 @@ if __name__ == '__main__':
 
     classes = os.listdir(DATASET_PATH.format(args.dataset))
     num_classes = len(classes)
+    print (f'Found {num_classes} classes')
     
     class_indices = {gpu: [] for gpu in gpu_ids}
     for i, class_name in enumerate(classes):
