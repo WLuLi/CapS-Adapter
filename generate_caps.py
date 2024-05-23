@@ -19,7 +19,7 @@ HUGGINGFACE_KEY = ''
 DATASET_PATH = './data/caps/captioned_sample/{}'
 JSON_FILE_PATH = './data/caps/captioned_sample/{}/{}/captions.json'
 OUTPUT_PATH = './data/caps/caps_sd/{}/{}'
-SD_MODEL_PATH = './data/models/stable_diffusion/'
+SD_CACHE_DIR = './models/stable-diffusion-v1-4'
 
 logging.basicConfig(filename='generate_sd_caption.log', filemode='a', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 def parse_args():
@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument('--guidance_scale', help='Stable Diffusion guidance scale', type=float, default=9.5)
     parser.add_argument('--num_inference_steps', help='Number of denoising steps', type=int, default=85)
     parser.add_argument('--batch_size', help='Batch size for each Stable Diffusion inference', type=int, default=5)
-    parser.add_argument('--model_path', type=str, help="Path to the model", default=SD_MODEL_PATH)
+    parser.add_argument('--cache_dir', type=str, help="Model cache directory", default=SD_CACHE_DIR)
     parser.add_argument("--gpus", type=str, default=GPUS, help="Comma separated list of GPU IDs to use")
     parser.add_argument('--images_per_class', type=int, required=True, help="Number of images to generate per class")
     return parser.parse_args()
@@ -76,9 +76,9 @@ def clear_directory(directory_path):
         except Exception as e:
             print(f'Failed to delete {file_path}. Reason: {e}')
 
-def setup_stable_diffusion_pipeline(model_path, huggingface_key, gpu):
+def setup_stable_diffusion_pipeline(cache_dir, huggingface_key, gpu):
     device = f'cuda:{gpu}' if torch.cuda.is_available() else 'cpu'
-    pipe = StableDiffusionPipeline.from_pretrained(model_path, use_auth_token=huggingface_key, safety_checker=None)
+    pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", use_auth_token=huggingface_key, safety_checker=None, cache_dir=cache_dir)
     pipe = pipe.to(device)
     return pipe
 
@@ -166,7 +166,7 @@ def worker(gpu, args, class_indices, images_per_class):
             if not os.path.exists(json_file_path):
                 logging.info(f'not exist: {json_file_path}')
             data = load_json_data(json_file_path)
-            pipe = setup_stable_diffusion_pipeline(args.model_path, args.huggingface_key, gpu)
+            pipe = setup_stable_diffusion_pipeline(args.cache_dir, args.huggingface_key, gpu)
             updated_data = generate_images(args, data, classname, args.dataset, pipe, output_dir, images_per_class)
 
             with open(os.path.join(output_dir, "updated_data.json"), 'w') as file:

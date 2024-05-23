@@ -17,11 +17,10 @@ from dataloader import KShotDataLoader
 
 GPUS = '0,1,2,3,4,5,6,7'
 HUGGINGFACE_KEY = ''
-SD_MODEL_PATH = './models/stable_diffusion/'
+SD_CACHE_DIR = './models/stable-diffusion-v1-4'
 
 def parse_args():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--model_path', help='Path to the model', type=str, default=SD_MODEL_PATH)
 	parser.add_argument('--gpus', help='Comma separated list of GPU IDs to use', type=str, default=GPUS)
 	parser.add_argument('--start_index', help='Starting class index for downloading images', type=int, default=0)
 	parser.add_argument('--end_index', help='Ending class index for downloading images', type=int, default=1000)
@@ -32,7 +31,7 @@ def parse_args():
 	parser.add_argument('--dataset', help='Dataset to download', type=str, default='cifar10')
 	parser.add_argument('--prompt_shorthand', help='Name of sub-directory for storing the dataset based on prompt', type=str, default='cupl')
 	parser.add_argument('--huggingface_key', help='Huggingface key', type=str, default=HUGGINGFACE_KEY)
-	parser.add_argument('--cache_dir', help='Directory to store pre-trained stable diffusion model weights', type=str, default=SD_MODEL_PATH)
+	parser.add_argument('--cache_dir', help='Directory to store pre-trained stable diffusion model weights', type=str, default=SD_CACHE_DIR)
 	args = parser.parse_args()
 	assert args.end_index>args.start_index, 'end_index is less than or equal to start_index'
 	return args
@@ -76,10 +75,7 @@ def get_save_folder_and_class_names(args):
 
 def setup_stable_diffusion_pipeline(args, device):
     """Setup the Stable Diffusion pipeline."""
-    if(args.cache_dir is None):
-        pipe = StableDiffusionPipeline.from_pretrained(args.model_path, use_auth_token=args.huggingface_key, safety_checker=None)
-    else:
-        pipe = StableDiffusionPipeline.from_pretrained(args.model_path, use_auth_token=args.huggingface_key, cache_dir=args.cache_dir, safety_checker=None)
+    pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", use_auth_token=args.huggingface_key, safety_checker=None, cache_dir=args.cache_dir)
     pipe = pipe.to(device)
     return pipe
 

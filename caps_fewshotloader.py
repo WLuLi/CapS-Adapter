@@ -109,6 +109,8 @@ class SelectedImagesLoader():
         captions = []
 
         self.classes = sorted(self.classes)
+        for i in range(len(self.classes)):
+            self.classes[i] = self.classes[i].replace('_', ' ')
         if self.dataset == 'country211':
             class_text = 'A photo shoot in {}. '
         elif self.dataset == 'eurosat':
@@ -116,8 +118,6 @@ class SelectedImagesLoader():
         else:
             class_text = 'A photo of {}. '
         for class_index, class_name in enumerate(self.classes):
-            # if self.dataset == 'cifar10' and class_name == 'plane':
-            #     class_name = 'airplane'
             class_text = class_text.format(class_name)
             json_path = os.path.join(self.root, class_name, 'captions.json')
             if os.path.exists(json_path):
