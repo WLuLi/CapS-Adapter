@@ -95,10 +95,8 @@ for model_name in req_models:
 
     if not os.path.exists(features_path):
         os.makedirs(features_path)
-    store_features_path = features_path + "/" +  str(args.images_per_class) + "/sus_sd_{}_{}_f_m{}.pt".format(args.prompt_shorthand, dataset, disp_name)
-    store_targets_path = features_path + "/" +  str(args.images_per_class) + "/sus_sd_{}_{}_t_m{}.pt".format(args.prompt_shorthand, dataset, disp_name)
-    if not os.path.exists(features_path + "/" + str(args.images_per_class)):
-        os.makedirs(features_path + "/" + str(args.images_per_class))
+    store_features_path = features_path + "/sus_sd_{}_{}_f_m{}.pt".format(args.prompt_shorthand, dataset, disp_name)
+    store_targets_path = features_path + "/sus_sd_{}_{}_t_m{}.pt".format(args.prompt_shorthand, dataset, disp_name)
 
     if args.regenerate:
         if os.path.exists(store_features_path):
