@@ -112,9 +112,7 @@ class SelectedImagesLoader():
         for i in range(len(self.classes)):
             self.classes[i] = self.classes[i].replace('_', ' ')
         if self.dataset == 'country211':
-            class_text = 'A photo shoot in {}. '
-        elif self.dataset == 'eurosat':
-            class_text = 'A satellite image of {}. '
+            class_text = 'In {}. '
         else:
             class_text = 'A photo of {}. '
         for class_index, class_name in enumerate(self.classes):
