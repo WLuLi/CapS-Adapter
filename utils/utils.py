@@ -292,11 +292,9 @@ def get_num_classes(dataset):
     elif(dataset=='cifar100'):
         return 100
 
-DATASET_PATH = './data/{}'
+DATASET_PATH = './data/datasets/{}'
 
-def parse_image_paths(dataset_path, splits_paths):
-    dataset = dataset_path.split('/')[-1]
-
+def parse_image_paths(dataset, dataset_path, splits_paths):
     train_split, val_split, test_split = splits_paths['train'], splits_paths['val'], splits_paths['test']
 
     train_classnames = [(ind[1], ind[2]) for ind in train_split]
@@ -312,48 +310,49 @@ def parse_image_paths(dataset_path, splits_paths):
     return unique_classnames
 
 def get_classnames_from_split(dataset):
+    dataset_path = DATASET_PATH.format(dataset)
     if(dataset == 'stanfordcars'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_StanfordCars.json')
-        root_data_dir = DATASET_PATH
+        json_path = os.path.join(dataset_path, 'split_zhou_StanfordCars.json')
+        root_data_dir = dataset_path
     elif(dataset == 'ucf101'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_UCF101.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'UCF-101-midframes')
+        json_path = os.path.join(dataset_path, 'split_zhou_UCF101.json')
+        root_data_dir = os.path.join(dataset_path, 'UCF-101-midframes')
     elif(dataset == 'caltech101'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_Caltech101.json')
-        root_data_dir = os.path.join(DATASET_PATH, '101_ObjectCategories')
+        json_path = os.path.join(dataset_path, 'split_zhou_Caltech101.json')
+        root_data_dir = os.path.join(dataset_path, '101_ObjectCategories')
     elif(dataset == 'caltech256'):
-        json_path = os.path.join(DATASET_PATH, 'split_Caltech256.json')
-        root_data_dir = os.path.join(DATASET_PATH, '256_ObjectCategories')
+        json_path = os.path.join(dataset_path, 'split_Caltech256.json')
+        root_data_dir = os.path.join(dataset_path, '256_ObjectCategories')
     elif(dataset == 'cub'):
-        json_path = os.path.join(DATASET_PATH, 'split_CUB.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'images')     
+        json_path = os.path.join(dataset_path, 'split_CUB.json')
+        root_data_dir = os.path.join(dataset_path, 'images')     
     elif(dataset == 'birdsnap'):
-        json_path = os.path.join(DATASET_PATH, 'split_Birdsnap.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'images')
+        json_path = os.path.join(dataset_path, 'split_Birdsnap.json')
+        root_data_dir = os.path.join(dataset_path, 'images')
     elif(dataset == 'flowers102'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_OxfordFlowers.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'jpg')
+        json_path = os.path.join(dataset_path, 'split_zhou_OxfordFlowers.json')
+        root_data_dir = os.path.join(dataset_path, 'jpg')
     elif(dataset == 'sun397'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_SUN397.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'SUN397')
+        json_path = os.path.join(dataset_path, 'split_zhou_SUN397.json')
+        root_data_dir = os.path.join(dataset_path, 'SUN397')
     elif(dataset == 'dtd'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_DescribableTextures.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'images')
+        json_path = os.path.join(dataset_path, 'split_zhou_DescribableTextures.json')
+        root_data_dir = os.path.join(dataset_path, 'images')
     elif(dataset == 'eurosat'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_EuroSAT.json')
-        root_data_dir = os.path.join(DATASET_PATH, '2750')
+        json_path = os.path.join(dataset_path, 'split_zhou_EuroSAT.json')
+        root_data_dir = os.path.join(dataset_path, '2750')
     elif(dataset == 'oxfordpets'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_OxfordPets.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'images')
+        json_path = os.path.join(dataset_path, 'split_zhou_OxfordPets.json')
+        root_data_dir = os.path.join(dataset_path, 'images')
     elif(dataset == 'food101'):
-        json_path = os.path.join(DATASET_PATH, 'split_zhou_Food101.json')
-        root_data_dir = os.path.join(DATASET_PATH, 'images')            
+        json_path = os.path.join(dataset_path, 'split_zhou_Food101.json')
+        root_data_dir = os.path.join(dataset_path, 'images')
     else:
         raise ValueError("Dataset not supported")
 
     splits_paths = json.load(open(json_path))
 
-    string_classnames = parse_image_paths(root_data_dir, splits_paths)
+    string_classnames = parse_image_paths(dataset, root_data_dir, splits_paths)
 
     if(dataset=='caltech256'):
         string_classnames = [s.split('.')[1].replace('-101', '') for s in string_classnames]
@@ -363,6 +362,8 @@ def get_classnames_from_split(dataset):
 def get_classnames(dataset):
     if dataset == 'country211':
         return country211_classes()
+    elif(dataset=='imagenet'):
+        return imagenet_classes()
     elif(dataset=='imagenet-sketch'):
         return imagenet_classes()
     elif(dataset=='imagenet-r'):
@@ -371,6 +372,12 @@ def get_classnames(dataset):
         return cifar10_classes()
     elif(dataset=='cifar100'):
         return cifar100_classes()
+    elif(dataset=='fgvcaircraft'):
+        txt_path = DATASET_PATH.format('fgvcaircraft') + 'variants.txt'
+        with open(txt_path, 'r') as f:
+            classnames = f.readlines()
+            classnames = [c.strip() for c in classnames]
+        return classnames
     else:
         return get_classnames_from_split(dataset)
 
